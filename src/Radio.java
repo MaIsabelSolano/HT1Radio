@@ -1,6 +1,10 @@
+import java.util.*;
+
 public class Radio implements RadioGeneral{
 
     boolean ON;
+    float EmisorasFav[] = new float[12];
+
 
     Radio(){
         ON = false;

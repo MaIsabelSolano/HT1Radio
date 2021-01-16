@@ -3,8 +3,7 @@ public interface RadioGeneral {
 
     //Esta es la segunda prueba
 
-    RadioGeneral(){}
-
+    //Tercera prueba para subir a github
 
     //métodos que debe contener la clase
     boolean isON();

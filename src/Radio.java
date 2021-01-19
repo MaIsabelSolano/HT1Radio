@@ -2,11 +2,12 @@ import java.util.*;
 
 public class Radio implements RadioGeneral{
 
-    boolean ON;
-    float EmisorasFav[] = new float[12];
+    //Atributos
+    private boolean ON; //true significa que está encendida, false que está apagada
+    private boolean Frecuencia; //true significa AM y false es FM
 
 
-    Radio(){
+    public Radio(){
         ON = false;
     }
 
@@ -17,16 +18,16 @@ public class Radio implements RadioGeneral{
 
     @Override
     public void encender() {
-
+        this.ON = true;
     }
 
     @Override
     public void apagar() {
-
+        this.ON = false;
     }
 
     @Override
-    public void increntar() {
+    public void incrementar() {
 
     }
 
@@ -47,6 +48,13 @@ public class Radio implements RadioGeneral{
 
     @Override
     public void frecuencia() {
-
+        if (Frecuencia == true){
+            Frecuencia = false;
+            //Cambiar de AM a FM
+        }
+        else {
+            Frecuencia = true;
+            //Cambiar de FM a AM
+        }
     }
 }

@@ -32,11 +32,6 @@ public class Radio implements RadioGeneral{
     }
 
     @Override
-    public void disminuir() {
-
-    }
-
-    @Override
     public void asignar() {
 
     }

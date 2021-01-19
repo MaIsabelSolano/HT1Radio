@@ -15,17 +15,16 @@ public class Driver {
                 System.out.println("Escriba el numero de la opcion que desea utilizar");
                 System.out.println("1. Encender");
                 System.out.println("2. Incrementar emisora");
-                System.out.println("3. Disminuir emisora");
-                System.out.println("4. Cambiar de emisora (AM/FM)");
-                System.out.println("5. Elegir Emisora de favoritas");
-                System.out.println("6. Asignar Emisora a favoritas");
-                System.out.println("7. Apagar");
+                System.out.println("3. Cambiar de emisora (AM/FM)");
+                System.out.println("4. Elegir Emisora de favoritas");
+                System.out.println("5. Asignar Emisora a favoritas");
+                System.out.println("6. Apagar");
 
                 int opcion = scan.nextInt();
 
                 if (opcion == 1){
                     //Encender la radio
-                    if (radio.isON() == false) {
+                    if (!radio.isON()) {
                         radio.encender();
                         System.out.println("Se ha encendido la radio");
                     }
@@ -37,9 +36,6 @@ public class Driver {
                     //Incrementar el número de la emisora
                 }
                 else if (opcion == 3){
-                    //Disminuir el número de la emisora
-                }
-                else if (opcion == 4){
                     //Cambiar de emisora
                     if (radio.isON()) {
                         radio.frecuencia();
@@ -49,15 +45,15 @@ public class Driver {
                         System.out.println("Necesita encender la radio primero para realizar esta accion");
                     }
                 }
-                else if (opcion == 5){
+                else if (opcion == 4){
                     //elegir emisora de favoritas
                 }
-                else if (opcion == 6){
+                else if (opcion == 5){
                     //Agregar estación a favoritas
                 }
-                else if (opcion == 7){
+                else if (opcion == 6){
                     //Apagar la radio
-                    if (radio.isON() == true) {
+                    if (radio.isON()) {
                         radio.apagar();
                         System.out.println("Se ha apagado la radio");
                     }

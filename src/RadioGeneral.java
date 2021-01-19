@@ -9,8 +9,6 @@ public interface RadioGeneral {
 
     void increntar();
 
-    void disminuir();
-
     void asignar();
 
     void emisoras();

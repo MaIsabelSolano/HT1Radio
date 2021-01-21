@@ -12,6 +12,17 @@ public class Driver {
 
         while (verificador != true){
             try {
+
+                if(radio.isON() == true){
+                    if(radio.frecuencia == true){
+                        System.out.println("\nEMISORA ACTUAL: " + radio.emisoraAM + " AM\n");
+                    } else if(radio.frecuencia == false){
+                        System.out.println("\nEMISORA ACTUAL: " + radio.emisoraFM + " FM\n");
+                    }
+                } else {
+                    System.out.println("\nNO SIGNAL\n");
+                }
+
                 System.out.println("Escriba el numero de la opcion que desea utilizar");
                 System.out.println("1. Encender");
                 System.out.println("2. Incrementar emisora");
@@ -25,20 +36,21 @@ public class Driver {
                 if (opcion == 1){
                     //Encender la radio
                     if (!radio.isON()) {
-                        radio.encender();
-                        System.out.println("Se ha encendido la radio");
+                        radio.encenderRadio();
+                        System.out.println("\nSe ha encendido la radio");
                     }
                     else {
                         System.out.println("La radio ya estaba encendida...");
                     }
                 }
                 else if (opcion == 2){
-                    //Incrementar el número de la emisora
+					//Incrementar de emisión
+                    radio.subirDeEmisora();
                 }
                 else if (opcion == 3){
                     //Cambiar de emisora
                     if (radio.isON()) {
-                        radio.frecuencia();
+                        radio.cambiarEmisora();
                         System.out.println("Se ha cambiado de frecuencia\n");
                     }
                     else {
@@ -47,14 +59,70 @@ public class Driver {
                 }
                 else if (opcion == 4){
                     //elegir emisora de favoritas
+
+                    if(radio.isON()){
+                        int boton = 0;
+                        System.out.println("\nEscoge un boton del 1 al 12\n");
+
+                        boolean correcto = false;
+
+                        while(!correcto){ //Seguirá funcionando hasta que se escoja una opción válida.
+                            try{
+                                boton = scan.nextInt();
+
+                                if (boton > 12 || boton < 1){ //Verifica que la opción sea válida.
+                                    System.out.println("\nOPCION INVALIDA.\n");
+                                }  else {
+                                    radio.seleccionarEmisora(boton - 1);
+                                    correcto = true;
+                                }
+
+                            } catch (InputMismatchException e){ //Si el usuario ingresa un valor no numerico, se ejecutará esto.
+                                System.out.println("\nPor favor ingrese una cantidad numerica.\n");
+                                scan.next();
+                            }
+                        }
+                    } else {
+                        System.out.println("Necesita encender la radio primero para realizar esta accion");
+                    }
+
                 }
                 else if (opcion == 5){
                     //Agregar estación a favoritas
+
+                    if(radio.isON()){
+                        int boton = 0;
+                        System.out.println("\nEscoge un boton del 1 al 12\n");
+
+                        boolean correcto = false;
+
+                        while(!correcto){ //Seguirá funcionando hasta que se escoja una opción válida.
+                            try{
+                                boton = scan.nextInt();
+
+                                if (boton > 12 || boton < 1){ //Verifica que la opción sea válida.
+                                    System.out.println("\nOPCION INVALIDA.\n");
+                                }  else {
+                                    radio.guardarEmisora((boton-1));
+                                    correcto = true;
+                                }
+
+                            } catch (InputMismatchException e){ //Si el usuario ingresa un valor no numerico, se ejecutará esto.
+                                System.out.println("\nPor favor ingrese una cantidad numerica.\n");
+                                scan.next();
+                            }
+                        }
+
+                    } else {
+                        System.out.println("Necesita encender la radio primero para realizar esta accion");
+                    }
+
+
                 }
                 else if (opcion == 6){
                     //Apagar la radio
                     if (radio.isON()) {
-                        radio.apagar();
+                        radio.apagarRadio();
                         System.out.println("Se ha apagado la radio");
                     }
                     else {

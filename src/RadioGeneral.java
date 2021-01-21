@@ -1,18 +1,18 @@
 public interface RadioGeneral {
 
-    //métodos que debe contener la clase
-    boolean isON();
+    //métodos que debe contener el radio desarrollado para este ejercicio.
+    public abstract boolean isON();
 
-    void encender();
+    public abstract void encenderRadio();
 
-    void apagar();
+    public abstract void apagarRadio();
 
-    void incrementar();
+    public abstract void subirDeEmisora();
 
-    void asignar(int pos);
+    public abstract void guardarEmisora(int pos);
 
-    void emisoras(int pos);
+    public abstract void seleccionarEmisora(int pos);
 
-    void frecuencia();
+    public abstract void cambiarEmisora();
 
 }

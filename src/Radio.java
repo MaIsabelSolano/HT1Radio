@@ -2,6 +2,7 @@
  * @author Pedro y Michy
  * Universidad del Valle de Guatemala
  * Algoritmos y estructuras de datos
+ * Seccion 10
  */
 
 import java.util.*;

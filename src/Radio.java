@@ -172,37 +172,6 @@ public class Radio implements RadioGeneral{
         }
     }
 
-
-    /**
-     * Esta sección se realizó para poder hacer las pruebas unitarias con JUnit.
-     */
-
-    @Test
-    public void pruebaIsOn(){
-        Radio radio = new Radio();
-
-        /**Prueba unitaria realizada en el método isON() de la clase Radio */
-        assertEquals(false, radio.isON());
-
-    }
-
-    @Test
-    public void pruebaEmisora(){
-
-        /**Prueba unitaria realizada en el método emisora() de la clase Radio */
-        Radio radio = new Radio();
-        assertEquals(true, radio.emisora(2));
-    }
-
-
-    @Test
-    public void pruebaAsignar(){
-
-        /**Prueba unitaria realizada en el método asignar() de la clase Radio */
-        Radio radio = new Radio();
-        assertEquals(true, radio.asignar(2));
-    }
-
     
 }
 

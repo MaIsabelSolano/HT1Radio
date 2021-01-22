@@ -1,18 +1,54 @@
+/**
+ * @author Pedro y Michy
+ * Universidad del Valle de Guatemala
+ * Algoritmos y estructuras de datos
+ * Seccion 10
+ */
 public interface RadioGeneral {
 
     //métodos que debe contener el radio desarrollado para este ejercicio.
+    /**
+     *Verifica que el radio esté encendido para evitar que se usen funciones cuando está apagado.
+     * @return valor booleano
+     */
     public abstract boolean isON();
 
-    public abstract void encenderRadio();
 
-    public abstract void apagarRadio();
+    /**
+     *Enciende la radio.
+     */
+    public abstract void encender();
 
-    public abstract void subirDeEmisora();
 
-    public abstract void guardarEmisora(int pos);
+    /**
+     *Apaga la radio.
+     */
+    public abstract void apagar();
 
-    public abstract void seleccionarEmisora(int pos);
 
-    public abstract void cambiarEmisora();
+    /**
+     *Incrementa la emisora al escuchar la radio.
+     */
+    public abstract void incrementar();
+
+    /**
+     *Asigna la radio preferida a uno de los 12 botones del radio.
+     * @param num
+     * @return valor booleano
+     */
+    public abstract boolean asignar(int num);
+
+    /**
+     *Selecciona una emisora marcada como favorita.
+     * @param num
+     * @return
+     */
+    public abstract boolean emisora(int num);
+
+
+    /**
+     * Cambia la frecuencia de la radio.
+     */
+    public abstract void frecuencia();
 
 }

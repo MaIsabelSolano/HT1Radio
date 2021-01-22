@@ -1,3 +1,10 @@
+/**
+ * @author Pedro y Michy
+ * Universidad del Valle de Guatemala
+ * Algoritmos y estructuras de datos
+ * Seccion 10
+ */
+
 import java.util.*; //Para utilizar scanner y progra defensiva
 
 public class Driver {
@@ -36,7 +43,7 @@ public class Driver {
                 if (opcion == 1){
                     //Encender la radio
                     if (!radio.isON()) {
-                        radio.encenderRadio();
+                        radio.encender();
                         System.out.println("\nSe ha encendido la radio");
                     }
                     else {
@@ -45,12 +52,12 @@ public class Driver {
                 }
                 else if (opcion == 2){
 					//Incrementar de emisión
-                    radio.subirDeEmisora();
+                    radio.incrementar();
                 }
                 else if (opcion == 3){
-                    //Cambiar de emisora
+                    //Cambiar de frecuencia
                     if (radio.isON()) {
-                        radio.cambiarEmisora();
+                        radio.frecuencia();
                         System.out.println("Se ha cambiado de frecuencia\n");
                     }
                     else {
@@ -73,7 +80,7 @@ public class Driver {
                                 if (boton > 12 || boton < 1){ //Verifica que la opción sea válida.
                                     System.out.println("\nOPCION INVALIDA.\n");
                                 }  else {
-                                    radio.seleccionarEmisora(boton - 1);
+                                    radio.emisora(boton - 1);
                                     correcto = true;
                                 }
 
@@ -103,7 +110,7 @@ public class Driver {
                                 if (boton > 12 || boton < 1){ //Verifica que la opción sea válida.
                                     System.out.println("\nOPCION INVALIDA.\n");
                                 }  else {
-                                    radio.guardarEmisora((boton-1));
+                                    radio.asignar((boton-1));
                                     correcto = true;
                                 }
 
@@ -122,7 +129,7 @@ public class Driver {
                 else if (opcion == 6){
                     //Apagar la radio
                     if (radio.isON()) {
-                        radio.apagarRadio();
+                        radio.apagar();
                         System.out.println("Se ha apagado la radio");
                     }
                     else {
@@ -145,6 +152,7 @@ public class Driver {
                 scan.nextLine(); //Para que el programa continue funcionando
             }
         }
+       
 
     }
 }

@@ -1,4 +1,13 @@
+/**
+ * @author Pedro y Michy
+ * Universidad del Valle de Guatemala
+ * Algoritmos y estructuras de datos
+ */
+
 import java.util.*;
+
+import org.junit.Test;
+import static org.junit.Assert.assertEquals;
 
 public class Radio implements RadioGeneral{
 
@@ -28,17 +37,17 @@ public class Radio implements RadioGeneral{
     }
 
     @Override
-    public void encenderRadio() {
+    public void encender() {
         this.ON = true;
     }
 
     @Override
-    public void apagarRadio() {
+    public void apagar() {
         this.ON = false;
     }
 
     @Override
-    public void subirDeEmisora() {
+    public void incrementar() {
 
         if(frecuencia == true){ //Incrementa en la lista de emisoras en la frecuencia AM.
             int indice = emisorasAM.indexOf(emisoraAM);
@@ -72,7 +81,7 @@ public class Radio implements RadioGeneral{
     }
 
     @Override
-    public void guardarEmisora(int pos) {
+    public boolean asignar(int pos) {
         // TODO Auto-generated method stub
 
         if(frecuencia == true){ //Para la frecuencia AM.
@@ -100,6 +109,7 @@ public class Radio implements RadioGeneral{
                     System.out.println("\nPor favor ingrese una cantidad numerica.\n");
                     scanner.next();
                 }
+
             }
 
         } else if(frecuencia == false){ //Para la frecuencia FM.
@@ -131,10 +141,11 @@ public class Radio implements RadioGeneral{
             }
 
         }
+        return true;
     }
 
     @Override
-    public void seleccionarEmisora(int pos) { //Accede a la lista de emisoras favoritas
+    public boolean emisora(int pos) { //Accede a la lista de emisoras favoritas
 
         if(frecuencia == true){
             float emisoraSeleccionada = emisorasFavoritasAM.get(pos);
@@ -144,10 +155,12 @@ public class Radio implements RadioGeneral{
             float emisoraSeleccionada = emisorasFavoritasFM.get(pos);
             emisoraFM = emisoraSeleccionada;
         }
+
+        return true;
     }
 
     @Override
-    public void cambiarEmisora() { //Cambia la frecuencia del radio.
+    public void frecuencia() { //Cambia la frecuencia del radio.
         if (frecuencia == true){
             frecuencia = false;
             //Cambiar de AM a FM
@@ -157,5 +170,38 @@ public class Radio implements RadioGeneral{
             //Cambiar de FM a AM
         }
     }
+
+
+    /**
+     * Esta sección se realizó para poder hacer las pruebas unitarias con JUnit.
+     */
+
+    @Test
+    public void pruebaIsOn(){
+        Radio radio = new Radio();
+
+        /**Prueba unitaria realizada en el método isON() de la clase Radio */
+        assertEquals(false, radio.isON());
+
+    }
+
+    @Test
+    public void pruebaEmisora(){
+
+        /**Prueba unitaria realizada en el método emisora() de la clase Radio */
+        Radio radio = new Radio();
+        assertEquals(true, radio.emisora(2));
+    }
+
+
+    @Test
+    public void pruebaAsignar(){
+
+        /**Prueba unitaria realizada en el método asignar() de la clase Radio */
+        Radio radio = new Radio();
+        assertEquals(true, radio.asignar(2));
+    }
+
+    
 }
 

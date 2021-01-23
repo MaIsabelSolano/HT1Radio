@@ -10,7 +10,7 @@ import java.util.*;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
-public class Radio implements RadioGeneral{
+public class RadioMIPS implements RadioGeneral{
 
     //Atributos
     private boolean ON; //true significa que está encendida, false que está apagada

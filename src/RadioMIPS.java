@@ -7,16 +7,13 @@
 
 import java.util.*;
 
-import org.junit.Test;
-import static org.junit.Assert.assertEquals;
-
-public class RadioMIPS implements RadioGeneral{
+public class RadioMIPS implements RadioGeneral {
 
     //Atributos
     private boolean ON; //true significa que está encendida, false que está apagada
-    public boolean frecuencia; //true significa AM y false es FM
-    public float emisoraFM = 100.5f; //Emisora FM que aparece al encender el radio.
-    public float emisoraAM = 65.9f; //Emisora AM que aparece al encender el radio.
+    private boolean frecuencia; //true significa AM y false es FM
+    private float emisoraFM = 100.5f; //Emisora FM que aparece al encender el radio.
+    private float emisoraAM = 65.9f; //Emisora AM que aparece al encender el radio.
 
     /*Los atributos que aparecen abajo son las emisoras que estarán definidas para cada frecuencia y los botones para
     poder guardar nuestras emisoras favoritas. Los botones están representados como ArrayLists en este caso */
@@ -28,7 +25,7 @@ public class RadioMIPS implements RadioGeneral{
 
     Scanner scanner = new Scanner(System.in); //El scanner obtendrá un par de datos del usuario en los métodos.
 
-    public Radio(){
+    public RadioMIPS(){
         ON = false;
     }
 
@@ -40,11 +37,13 @@ public class RadioMIPS implements RadioGeneral{
     @Override
     public void encender() {
         this.ON = true;
+        System.out.println("\nESTADO: ENCENDIDO\n");
     }
 
     @Override
     public void apagar() {
         this.ON = false;
+        System.out.println("\nESTADO: APAGADO\n");
     }
 
     @Override
@@ -56,10 +55,14 @@ public class RadioMIPS implements RadioGeneral{
             for(indice++;indice < emisorasAM.size();){ //Itera en la lista de emisoras AM.
                 if(indice < emisorasAM.size()){
                     emisoraAM = emisorasAM.get(indice);
+                    System.out.println("\nIncrementando...");
+                    System.out.println("\nEMISORA ACTUAL: " + emisoraAM + " AM\n");
                     break;
 
                 } else{ //Verifica que si el numero de emisoras es mayor al tamaño, regresa al inicio.
                     emisoraAM = emisorasAM.get(0);
+                    System.out.println("\nIncrementando...");
+                    System.out.println("\nEMISORA ACTUAL: " + emisoraAM + " AM\n");
                     break;
                 }
 
@@ -70,10 +73,14 @@ public class RadioMIPS implements RadioGeneral{
             for(indice++;indice < emisorasFM.size();){ //Itera en la lista de emisoras FM.
                 if(indice < emisorasFM.size()){
                     emisoraFM = emisorasFM.get(indice);
+                    System.out.println("\nIncrementando...");
+                    System.out.println("\nEMISORA ACTUAL: " + emisoraFM + "\n FM");
                     break;
 
                 } else{ //Verifica que si el numero de emisoras es mayor al tamaño, regresa al inicio.
                     emisoraFM = emisorasFM.get(0);
+                    System.out.println("\nIncrementando...");
+                    System.out.println("\nEMISORA ACTUAL: " + emisoraFM + " FM\n");
                     break;
                 }
             }
@@ -82,18 +89,42 @@ public class RadioMIPS implements RadioGeneral{
     }
 
     @Override
-    public boolean asignar(int pos) {
+    public boolean asignar(int num) {
         // TODO Auto-generated method stub
 
         if(frecuencia == true){ //Para la frecuencia AM.
-            System.out.println("\nSelecciona la emisora que deseas guardar en tus favoritos\n");
-            for(int i = 0; i < emisorasAM.size(); i++){
-                System.out.println((i+1) + ") " + emisorasAM.get(i) + "AM\n");
+            int boton = 0;
+
+            System.out.println("\nSeleccione el boton donde desea guardar su emisora:\n");
+            for(int i = 0; i < emisorasFavoritasAM.size(); i++){
+                System.out.println((i+1) + ") " + emisorasFavoritasAM.get(i) + " AM\n");
+            }
+            boolean correcto = false;
+            while(!correcto){
+                System.out.println("Input:");
+                try { //Verifica que los datos sean del tipo correcto.
+                    boton = scanner.nextInt();
+                    if(boton > emisorasFavoritasAM.size() || boton < 1){
+                        System.out.println("\nOPCION INVALIDA\n");
+                    } else{
+                        boton -= 1;
+;                        correcto = true;
+                    }
+                } catch (InputMismatchException e) { //Atrapa el tipo de dato incorrecto y pide que se ingrese el tipo correcto.
+                    System.out.println("\nPor favor ingrese una cantidad numerica.\n");
+                    scanner.next();
+                }
             }
 
-            boolean correcto = false;
 
-            while(!correcto){
+            System.out.println("\nSelecciona la emisora que deseas guardar en tus favoritos\n");
+            for(int i = 0; i < emisorasAM.size(); i++){
+                System.out.println((i+1) + ") " + emisorasAM.get(i) + " AM\n");
+            }
+
+            boolean correctoDos = false;
+
+            while(!correctoDos){
                 System.out.println("Input:");
                 try { //Verifica que los datos sean del tipo correcto.
                     int seleccion = scanner.nextInt();
@@ -101,28 +132,50 @@ public class RadioMIPS implements RadioGeneral{
                         System.out.println("\nOPCION INVALIDA\n");
                     } else{
                         float emisoraFav = emisorasAM.get(seleccion - 1);
-                        emisorasFavoritasAM.set(pos, emisoraFav);
-                        System.out.println("\nSe ha agregado con exito a tus favoritos\n");
+                        emisorasFavoritasAM.set(boton, emisoraFav); //Arreglar esto
+                        System.out.println("\nSe ha agregado con exito la emisora" + emisoraFav +"a tus favoritos\n");
                         System.out.println(emisorasFavoritasAM);
-                        correcto = true;
+                        correctoDos = true;
                     }
                 } catch (InputMismatchException e) { //Atrapa el tipo de dato incorrecto y pide que se ingrese el tipo correcto.
                     System.out.println("\nPor favor ingrese una cantidad numerica.\n");
                     scanner.next();
                 }
-
             }
 
         } else if(frecuencia == false){ //Para la frecuencia FM.
 
-            System.out.println("\nSelecciona la emisora que deseas guardar en tus favoritos\n");
-            for(int i = 0; i < emisorasFM.size(); i++){
-                System.out.println((i+1) + ") " + emisorasFM.get(i) + "FM\n");
+            int boton = 0;
+
+            System.out.println("\nSeleccione el boton donde desea guardar su emisora:\n");
+            for(int i = 0; i < emisorasFavoritasFM.size(); i++){
+                System.out.println((i+1) + ") " + emisorasFavoritasFM.get(i) + " AM\n");
+            }
+            boolean correcto = false;
+            while(!correcto){
+                System.out.println("Input:");
+                try { //Verifica que los datos sean del tipo correcto.
+                    boton = scanner.nextInt();
+                    if(boton > emisorasFavoritasFM.size() || boton < 1){
+                        System.out.println("\nOPCION INVALIDA\n");
+                    } else{
+                        boton -= 1;
+;                        correcto = true;
+                    }
+                } catch (InputMismatchException e) { //Atrapa el tipo de dato incorrecto y pide que se ingrese el tipo correcto.
+                    System.out.println("\nPor favor ingrese una cantidad numerica.\n");
+                    scanner.next();
+                }
             }
 
-            boolean correcto = false;
+            System.out.println("\nSelecciona la emisora que deseas guardar en tus favoritos\n");
+            for(int i = 0; i < emisorasFM.size(); i++){
+                System.out.println((i+1) + ") " + emisorasFM.get(i) + " FM\n");
+            }
 
-            while(!correcto){
+            boolean correctoDos = false;
+
+            while(!correctoDos){
                 System.out.println("Input:");
                 try { //Verifica que los datos sean del tipo correcto.
                     int seleccion = scanner.nextInt();
@@ -130,10 +183,10 @@ public class RadioMIPS implements RadioGeneral{
                         System.out.println("\nOPCION INVALIDA\n");
                     } else{
                         float emisoraFav = emisorasFM.get(seleccion - 1);
-                        emisorasFavoritasFM.set(pos, emisoraFav);
-                        System.out.println("\nSe ha agregado con exito a tus favoritos\n");
+                        emisorasFavoritasFM.set(boton, emisoraFav); //Arreglar esto
+                        System.out.println("\nSe ha agregado con exito la emisora" + emisoraFav +"a tus favoritos\n");
                         System.out.println(emisorasFavoritasFM);
-                        correcto = true;
+                        correctoDos = true;
                     }
                 } catch (InputMismatchException e) { //Atrapa el tipo de dato incorrecto y pide que se ingrese el tipo correcto.
                     System.out.println("\nPor favor ingrese una cantidad numerica.\n");
@@ -146,32 +199,79 @@ public class RadioMIPS implements RadioGeneral{
     }
 
     @Override
-    public boolean emisora(int pos) { //Accede a la lista de emisoras favoritas
+    public boolean emisora(int num) { //Accede a la lista de emisoras favoritas
 
         if(frecuencia == true){
-            float emisoraSeleccionada = emisorasFavoritasAM.get(pos);
-            emisoraAM = emisoraSeleccionada;
+            int boton = 0;
+
+            System.out.println("\nSeleccione su emisora favorita de la lista:\n");
+            for(int i = 0; i < emisorasFavoritasFM.size(); i++){
+                System.out.println((i+1) + ") " + emisorasFavoritasFM.get(i) + " AM\n");
+            }
+            boolean correcto = false;
+            while(!correcto){
+                System.out.println("Input:");
+                try { //Verifica que los datos sean del tipo correcto.
+                    boton = scanner.nextInt();
+                    if(boton > emisorasFavoritasFM.size() || boton < 1){
+                        System.out.println("\nOPCION INVALIDA\n");
+                    } else{
+                        boton -= 1;
+                        float emisoraSeleccionada = emisorasFavoritasAM.get(boton); //Arreglar esto
+                        emisoraAM = emisoraSeleccionada;
+                        System.out.println("\nEMISORA ACTUAL: " + emisoraAM + " AM\n");
+;                        correcto = true;
+                    }
+                } catch (InputMismatchException e) { //Atrapa el tipo de dato incorrecto y pide que se ingrese el tipo correcto.
+                    System.out.println("\nPor favor ingrese una cantidad numerica.\n");
+                    scanner.next();
+                }
+            }
+
 
         } else if(frecuencia == false){
-            float emisoraSeleccionada = emisorasFavoritasFM.get(pos);
-            emisoraFM = emisoraSeleccionada;
-        }
+            int boton = 0;
 
-        return true;
+            System.out.println("\nSeleccione su emisora favorita de la lista:\n");
+            for(int i = 0; i < emisorasFavoritasFM.size(); i++){
+                System.out.println((i+1) + ") " + emisorasFavoritasFM.get(i) + " AM\n");
+            }
+            boolean correcto = false;
+            while(!correcto){
+                System.out.println("Input:");
+                try { //Verifica que los datos sean del tipo correcto.
+                    boton = scanner.nextInt();
+                    if(boton > emisorasFavoritasFM.size() || boton < 1){
+                        System.out.println("\nOPCION INVALIDA\n");
+                    } else{
+                        boton -= 1;
+                        float emisoraSeleccionada = emisorasFavoritasFM.get(boton); //Arreglar esto
+                        emisoraFM = emisoraSeleccionada;
+                        System.out.println("\nEMISORA ACTUAL: " + emisoraFM + " FM\n");
+;                       correcto = true;
+                    }
+                } catch (InputMismatchException e) { //Atrapa el tipo de dato incorrecto y pide que se ingrese el tipo correcto.
+                    System.out.println("\nPor favor ingrese una cantidad numerica.\n");
+                    scanner.next();
+                }
+            }
+        }
+        return ON;
     }
 
     @Override
     public void frecuencia() { //Cambia la frecuencia del radio.
         if (frecuencia == true){
             frecuencia = false;
+            System.out.println("\nFRECUENCIA ACTUAL: FM\n");
             //Cambiar de AM a FM
         }
         else {
             frecuencia = true;
+            System.out.println("\nFRECUENCIA ACTUAL: AM\n");
             //Cambiar de FM a AM
         }
     }
-
-    
 }
+
 

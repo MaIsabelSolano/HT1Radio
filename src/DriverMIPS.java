@@ -7,7 +7,7 @@
 
 import java.util.*; //Para utilizar scanner y progra defensiva
 
-public class Driver {
+public class DriverMIPS {
     public static void main (String [] args){
 
         //Instanciar la clase Scanner
